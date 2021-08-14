@@ -1,0 +1,78 @@
+
+<div class="buses container mt-5 rounded p-4" >
+<form [formGroup]="form" class="d-flex justify-content-between" (ngSubmit)="form.valid && onSubmit(form)">
+   <div class="form-group me-md-3">
+        <label for="boarding"><strong>From</strong></label><br>
+        <select class="form-control" id="boarding" name="boardingLocation" formControlName="boardingLocation" >
+            <option selected value="">Select option</option>
+            <option *ngFor="let place of places">{{place}}</option>
+        </select>
+        <div *ngIf="boardingLocation?.invalid && boardingLocation?.touched" class="text-danger"> 
+            <div *ngIf="boardingLocation?.errors?.required">Please select Location</div>
+        </div>
+    </div>
+
+    <div class="form-group me-md-3">
+        <label for="destination"><strong>To</strong></label><br>
+        <select class="form-control" id="destination" name="destinationLocation" formControlName="destinationLocation">
+            <option selected value="">Select option</option>
+            <option *ngFor="let place of places">{{place}}</option>
+        </select>
+        <div *ngIf="destinationLocation?.invalid && destinationLocation?.touched" class="text-danger"> 
+            <div *ngIf="destinationLocation?.errors?.required">Please select Location</div>
+        </div>
+    </div>
+
+    <div class="form-group me-md-3">
+        <label for="travelDate"><strong>Travel Date</strong></label>
+        <input type="date" min="{{currentDate|date:'yyyy-MM-dd'}}" id="travelDate" class="form-control" name="travellingDate" formControlName="travellingDate">
+        <div *ngIf="travellingDate?.invalid && travellingDate?.touched" class="text-danger"> 
+            <div *ngIf="travellingDate?.errors?.required">Please select Date</div>
+        </div>
+    </div>
+
+    <div >
+       <input class="btn trip rounded-3" type="submit" value="Plan a Travel" [disabled]=form.invalid>
+    </div><br><br>
+</form>
+<button class="edit rounded mt-3 px-3 me-2" (click)="onEdit()">Edit</button>
+<input class="clear rounded mt-3 px-2" type="reset" value="Clear" (click)="onClear(form)">
+</div>
+
+
+<!-- Error message -->
+<div class=" container alert alert-danger text-center mt-5" *ngIf="onError">
+    Boarding and Destination location cannot be same
+</div>
+<div class="empty" *ngIf="!onResponse"></div>
+
+<!-- Table of bus details -->
+<div class="mt-5 p-4" *ngIf="onResponse && !onError">
+<table class="container table table-hover rounded">
+    <thead class="thead-light">
+        <tr class="table-light">
+            <th scope="col">Bus Type</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Date</th>
+            <th scope="col">Available</th>
+            <th scope="col">Fare</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-light" *ngFor="let x of response">
+                <td>{{x.busType}}</td>
+                <td>{{x.departure}}</td>
+                <td>{{x.arrival}}</td>
+                <td>{{d}}</td>
+                <td>{{x.available}}</td>
+                <td>{{x.fare}}</td>
+                <td><div class="btn seating cursor-pointer" (click)="viewSeats(x)">View Seats</div></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+
+

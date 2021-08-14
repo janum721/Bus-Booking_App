@@ -1,0 +1,34 @@
+.buses{
+    width: 1000px;
+    background-color: rgba(255, 255,255,0.8);
+}
+.trip{
+    background-color: green;
+    color: white;
+    margin-top: 25px; 
+}
+.edit{
+    background-color: blue; 
+    color: white; 
+}
+.clear{
+    background-color: grey; 
+    color: white;
+}
+.table{
+    width: 1000px; 
+}
+.seating{
+    cursor: pointer;
+    background-color: green; 
+    color: white;
+}
+.alert{
+    width:1000px;
+}
+.form-group{
+    width:200px;
+}
+.empty{
+    margin: 25% 0;
+}

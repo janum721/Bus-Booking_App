@@ -1,0 +1,93 @@
+
+<form [formGroup]="paymentForm" class="container col-8 col-lg-6 mt-4 p-4 rounded" (ngSubmit)="paymentForm.valid && onSubmit(paymentForm)">
+   
+   <div class="p-2 bg-success text-light">Transaction Id: &nbsp;{{TransactionId}}</div><br>
+   
+    <div class="form-group row mb-4">
+    <label class="col-sm-5 col-lg-5 col-form-label">Card Type</label>
+
+    <div class="col-2 form-check"> 
+       <label class="form-check-label m-2">
+        <input class="form-check-input mt-0" type="radio" name="cardType" formControlName="cardType" value="Visa">&nbsp;Visa</label>
+    </div>
+
+    <div class="col form-check"> 
+        <label class="form-check-label m-2"><input class="form-check-input mt-0" type="radio" name="cardType" formControlName="cardType" value="MasterCard">&nbsp;Master Card</label>
+    </div>
+    </div>
+
+    <div class="form-group row mb-4 ">
+        <label class="col-sm-5 col-lg-5 col-form-label">Card Number</label>
+        <div class="col-sm-6">
+        <input type="text" class="form-control" formControlName="cardNo">
+        <div *ngIf="cardNo?.invalid && cardNo?.touched" class="alert-danger py-2 rounded">
+            <div *ngIf="cardNo?.errors?.required">Card Number is required*</div>
+            <div *ngIf="cardNo?.errors?.pattern">Only digits are accepted</div>
+            <div *ngIf="cardNo?.errors?.minlength || cardNo?.errors?.maxlength">Card Number Should be of 16 digits</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label class="col-sm-5  col-lg-5 col-form-label">Name on card</label>
+        <div class="col-sm-6" >
+
+       <input type="text" class="form-control" formControlName="name">
+        
+            <div *ngIf="name?.invalid  && name?.touched" class="alert-danger py-2 rounded">
+            <div *ngIf="name?.errors?.required">Card Holder Name is required*</div>
+            <div *ngIf="name?.errors?.pattern">Only Alphabets and spaces are accepted</div>
+            <div *ngIf="name?.errors?.maxlength || name?.errors?.minlength">Name should be atleast 3 characters not exceeding 30 Characters</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label class="col-sm-5  col-lg-5 col-form-label">CVV</label>
+        <div class="col-sm-6">
+        <input type="password" class="form-control" formControlName="cvv" >
+        <div *ngIf="cvv?.invalid && cvv?.touched" class="alert-danger py-2 rounded">
+            <div *ngIf="cvv?.errors?.required">CVV is required*</div>
+            <div *ngIf="cvv?.errors?.pattern">Only Digits are accepted</div>
+            <div *ngIf="cvv?.errors?.minlength || cvv?.errors?.maxlength">CVV should be of 3 digits</div>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label class=" col-sm-5 col-lg-5  col-form-label" for="expiry date">Expiry date</label>
+        
+        <div class="col-sm-3">       
+        <select class="form-control" id="expiry date" name="month" formControlName="month">
+        <option value="">Month</option>
+        <option *ngFor="let month of Month">{{month}}</option>
+        </select>
+        <div *ngIf="month?.invalid && month?.touched" class="text-danger"> 
+        <div *ngIf="month?.errors?.required">Please select Month</div>
+        </div>
+        </div>
+
+        <div class="col-sm-3 ">   
+            <select class="form-control"  name="year" formControlName="year">
+            <option value="">Year</option>
+            <option *ngFor="let year of Year">{{year}}</option>
+            </select>
+            <div *ngIf="year?.invalid && year?.touched" class="text-danger"> 
+            <div *ngIf="year?.errors?.required">Please select year</div><br>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <label class="col-md-5 col-lg-5  col-lg-5 ">Total Amount </label>
+        <div class="col-md-6"><strong>{{summaryDetails.charge}}/-</strong></div> 
+        
+    </div>
+        
+    <div class="form-group   mt-5">
+        <input [disabled]=paymentForm.invalid class="pay btn rounded " type="submit" value="Pay Now">
+        <input class="cancel btn ms-2 rounded" type="reset" value="Cancel">
+    </div>
+
+</form>

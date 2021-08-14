@@ -1,0 +1,59 @@
+.seats{
+    background-color:rgba(255, 255, 255, 0.7);
+}
+.summary{
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.select_seats{
+    width:40%;  
+}
+li{
+    cursor: pointer;
+}
+.select_seats ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 200px;
+}
+
+.select_seats ul li{
+    padding:0;
+    width:40px;
+    height:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:2px solid black;
+    box-sizing: border-box;
+    margin: 2px;
+    
+}
+.select_seats ul li.disabled{
+    background-color:red;
+    cursor: text;
+}
+
+.select_seats ul li.isSelected{
+    background-color: green;
+}
+
+.paymentDisable{
+    background-color: rgba(66, 191, 66,0.7);
+    color: white;
+}
+.paymentEnable{
+    background-color: green;
+    color: white;
+}
+.table{
+    table-layout: fixed;
+}
+.clumbsy{
+    width: 80px;
+    overflow-x: auto;
+}

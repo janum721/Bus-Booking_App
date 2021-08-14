@@ -1,0 +1,43 @@
+<div id="pdfTable" class="container px-5 py-1 ticket mt-2  rounded">
+  <h2 class="heading mt-2 fw-bolder">Ticket Details</h2>
+<hr>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>Boarding Location</strong></div>
+    <div class="col-md-8">{{ finalSummary.from }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-4"><strong>Destination Location</strong></div>
+    <div class=" col-md-8">{{ finalSummary.to }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-4"><strong>Date of travel</strong></div>
+    <div class=" col-md-8">{{ finalSummary.date }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>BusType</strong></div>
+    <div class=" col-md-8">{{ finalSummary.busType }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>No.of Seats</strong></div>
+    <div class=" col-md-8">{{ finalSummary.totalSeats }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>Seats Selected</strong></div>
+    <div class=" col-md-8">{{ finalSummary.seats }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>Total Charge</strong></div>
+    <div class=" col-md-8">{{ finalSummary.charge }}</div>
+  </div>
+  <div class="row mb-3">
+    <div class=" col-md-4"><strong>Names of Passengers</strong></div>
+    <div class=" col-md-8">
+      <div class="d-flex flex-wrap">
+        <div *ngFor="let p of finalSummary.passengerName; let i=index">{{p}}{{i === finalSummary.passengerName.length - 1 ? '' : ',&nbsp;'}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-2 mb-5">
+  <button class=" btn btn-primary" (click)="downloadPDF()">Download PDF</button>
+</div>

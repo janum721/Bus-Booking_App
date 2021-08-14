@@ -1,0 +1,11 @@
+<header class="d-flex justify-content-between align-items-center py-2 px-5 sticky-top" >
+    
+    <div class=" name"><img src="../../assets/images/logo.jpg" class=" logo">Janum Travels</div>
+    <div class=""><a href="home">Log out</a></div>
+</header>
+
+<app-bus-details *ngIf="!busInfo" (busesDetails)="getDetails($event)" ></app-bus-details>
+<app-seats *ngIf="busInfo && !payments" [busDetails]="busInfo" (summary)="getSummary($event)"></app-seats>
+<app-payment *ngIf="payments && !ticket" [summaryDetails]="payments" (ticketSummary)="getTickets($event)"></app-payment>
+<app-confirmation *ngIf="ticket" [finalSummary]="ticket"></app-confirmation>
+

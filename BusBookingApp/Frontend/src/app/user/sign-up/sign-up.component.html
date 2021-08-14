@@ -1,0 +1,76 @@
+<div class="login row mt-3">
+    <form [formGroup]="signupform" class="col-10" (ngSubmit)="signupform.valid && onSubmit(signupform)" >
+    <h4 class="text-light"><strong>Sign Up</strong></h4>
+
+     <div class="form-group">
+        <input formControlName="name" type="text" name="name" placeholder="Name" class="form-control">
+        <div *ngIf="name?.invalid && name?.touched" class=" alert-danger p-2 rounded">
+            <div *ngIf="name?.errors?.required">Name is required*</div>
+            <div *ngIf="name?.errors?.pattern">Only Alphabets are accepted</div>
+        </div>
+    </div><br>
+
+       <div class="form-group">
+        <input formControlName="email" type="text" placeholder="Email" class="form-control">
+        <div *ngIf="email?.invalid && email?.touched" class=" alert-danger p-2 rounded">
+            <div *ngIf="email?.errors?.required">Email is required*</div>
+            <div *ngIf="email?.errors?.email">Invalid EmailId</div>
+        </div>
+    </div><br>
+
+       <div class="form-group">
+        <input formControlName="mobileno" type="text" name="mobileno" placeholder="Mobile Number" class="form-control">
+        <div *ngIf="mobileno?.invalid && mobileno?.touched" class=" alert-danger p-2 rounded">
+            <div *ngIf="mobileno?.errors?.required">Mobile Number is required*</div>
+            <div *ngIf="mobileno?.errors?.pattern || mobileno?.errors?.minlength || mobileno?.errors?.maxlength">Only 10 digits are accepted </div>
+        </div>
+    </div><br>
+
+       <div class="form-group">
+        <input formControlName="password" type="password" name="password" placeholder="Password" class="form-control">
+        <div *ngIf="password?.invalid && password?.touched" class=" alert-danger p-2 rounded">
+            <div *ngIf="password?.errors?.required">Password is required*</div>
+            <div *ngIf="password?.errors?.pattern || password?.errors?.minlength">Password should contain atleast one lowercase, uppercase, number and special character also and must contain 8 characters</div>
+
+        </div>
+    </div><br>
+
+
+       <div class="form-group">
+        
+        <input formControlName="dob" type="text"  max="{{currentDate|date:'yyyy-MM-dd'}}" onfocus="(this.type='date')" placeholder="Date of Birth" class="form-control">
+        <div *ngIf="dob?.invalid && dob?.touched" class=" alert-danger p-2 rounded">
+            <div *ngIf="dob?.errors?.required">Date of birth is required*</div>
+        </div>
+    </div><br>
+
+    <div class="form-group">
+
+        <input type="radio" name="gender" id="male" value="male" formControlName="gender"><label for="male">&nbsp;Male &nbsp;</label>
+        <input type="radio" name="gender" id="female" value="female" formControlName="gender"><label for="female">&nbsp;Female &nbsp;</label>
+        
+    </div><br>
+
+     <div class="form-group mb-5">
+        <input class="btn me-3" style="background-color: rgb(53, 173, 53); color:white;"  type="submit" value="signup" [disabled]=signupform.invalid>
+        <input class="btn" style="background-color: red;"  type="reset" value="Reset">
+    </div>
+
+    <!-- <div class="bg-success text-light p-2 rounded mt-1 col-10" *ngIf="showSucessMessage">
+      Details Saved Successfully
+    </div> -->
+    <div class=" alert-danger p-2 rounded mt-1 col-10" *ngIf="serverErrorMessage">
+        {{serverErrorMessage}}
+    </div>
+
+     </form>
+
+</div>
+
+
+
+
+
+
+
+

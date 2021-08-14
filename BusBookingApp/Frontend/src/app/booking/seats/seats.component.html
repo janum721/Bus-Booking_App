@@ -1,0 +1,93 @@
+
+<div class="seats container my-5 ms-md-3 mx-lg-auto rounded row py-5 justify-content-between" >
+    
+    <!-- Bus Seats -->
+    <div class="select_seats col-lg-5 col-md-12 my-5 p-4">
+         <ul>
+            <li *ngFor="let s of seats" [ngClass]="{disabled : reservedSeats.includes(s.seatno), isSelected : s.isSelected}" 
+                  (click)="selectSeats(s.seatno)" >
+                
+                <strong> {{s.seatno}}</strong>
+                    
+            </li>
+            </ul>
+    </div>
+
+    <!-- Booking Summary -->
+
+    <div class=" summary ms-md-4 p-4 rounded col-lg-5 col-md-8">
+        <form #f="ngForm" (ngSubmit)="f.valid && payment(f)">
+        <h3 class="fw-bolder">Booking Summary</h3>
+        <hr>
+            <div class=" row my-2">
+                <div class="col-6"><strong>From</strong></div>
+                <div class="col-5">{{busDetails.from}}</div>
+            </div>
+            <div class=" row my-2">
+                <div class="col-6"><strong>To</strong></div>
+                <div class="col-5">{{busDetails.to}}</div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Date </strong></div>
+                <div class="col-5">{{busDetails.date}}</div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Bus Type</strong></div>
+                <div class="col-5">{{busDetails.busType}}</div>
+            </div>
+           
+            <div class="row my-2">
+                <div class="col-6"><strong>Selected Seats</strong></div>
+                <div class="col-6 ">
+                    <div class="d-flex flex-wrap">
+                    <span  *ngFor="let seats of seatsSelection; let i=index">{{seats}}{{i === seatsSelection.length - 1 ? '' : ',&nbsp;'}}</span>
+                    </div>
+                </div>
+            </div>
+             <div  *ngFor="let seats of seatsSelection" class="row my-2">
+             
+               <div class="col-md-5 col-lg-6 w-50 ">
+                   <input class="rounded p-1 border border-dark" type="text" required minlength="3" pattern="^[a-zA-Z ]+$" ngModel name="{{'name' + seats}}" #name="ngModel" placeholder="Name">
+                    <div *ngIf="name?.touched && name?.invalid" class="text-danger">
+                       <div *ngIf="name?.errors?.required"> Name is Required*</div>
+                       <div *ngIf="name?.errors?.pattern">Accepts only alphabets,spaces</div>
+                       <div *ngIf="name?.errors?.minlength">Name should be of atleast 3 characters</div>
+                    </div>
+               </div>
+               
+               <div class="col-lg-5 w-50 mt-1">
+                <label for="gender{{seats}}" class="me-4">
+                <input type="radio" id="gender{{seats}}" required name="gender{{seats}}" value="male">
+               Male</label>
+               <label for="gender{{seats}}">
+                <input type="radio" id="gender{{seats}}"  required name="gender{{seats}}" value="female">
+                Female</label>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Total Seats</strong></div>
+                <div class="col-5">{{total}}</div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Fare</strong></div>
+                <div class="col-5">{{totalFare}}</div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Service Tax</strong></div>
+                <div class="col-5">{{tax}}</div>
+            </div>
+            <div class="row my-2">
+                <div class="col-6"><strong> Total Charge</strong></div>
+                <div class="col-5">{{totalCharge}}</div>
+            </div>
+        <input type="submit" value="Continue to Payment" class="paymentDisable rounded p-1" disabled *ngIf="!onPayment">
+        <input type="submit" value="Continue to Payment" class="paymentEnable rounded p-1" *ngIf="onPayment">
+     </form>
+    </div>
+</div>
+
+
+
+
+
+
